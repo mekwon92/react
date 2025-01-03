@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-//인라인 스타일ㅋ
+//인라인 스타일로 적용
 const styles = {
   wrapper : {
     margin : 8,
@@ -19,8 +19,8 @@ const styles = {
 class Notification extends React.Component {
   constructor(props) {
     super(props);
-    
-    this.state = {};
+
+   // this.state = {};
   }
 
   render() {
