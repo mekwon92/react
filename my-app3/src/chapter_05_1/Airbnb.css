@@ -1,0 +1,4 @@
+.wrapper {width: 1024px; margin: 0 auto;}
+.gallery-list {display: flex; list-style: none; padding: 0;}
+.gallery-list li {padding: 16px; margin: 16px;}
+.gallery-list li > div {padding: 8px 8px 32px; color: white; background-color: red;}

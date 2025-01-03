@@ -44,8 +44,8 @@ const Comment = (props) => {
       <div style={styles.contentContainer}>
         <span style={styles.nameText}>{props.name}</span>
         {/* <span style={styles.commentText}>{props.comment}</span> */}
-        <span style={(_) => {return {...styles.commentText, color:'blue'}}}>{props.comment}</span>
-        {/* <span style={{...styles.commentText, color:'blue'}}>{props.comment}</span> */}
+        {/* <span style={(_) => {return {...styles.commentText, color:'blue'}}}>{props.comment}</span> */}
+        <span style={{...styles.commentText, color:'blue'}}>{props.comment}</span>
       </div>
     </div>
   );

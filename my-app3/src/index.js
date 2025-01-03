@@ -3,9 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 // import App from './App';
 import reportWebVitals from './reportWebVitals';
-import CommentList from './chapter_05_1/CommentList';
-
-
+import NotificationList from './chapter_06/NotificationList';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 setInterval(() => {
@@ -22,7 +20,10 @@ setInterval(() => {
       <Comment author={{name:'작가명', avatarUrl: 'https://placehold.co/60x40'}} text="텍스트" date={new Date()} />
       <Comment author={{name:'작가명', avatarUrl: 'https://placehold.co/60x40'}} text="텍스트" date={new Date()} />
       <Comment author={{name:'작가명', avatarUrl: 'https://placehold.co/60x40'}} text="텍스트" date={new Date()} /> */}
-      <CommentList />
+      {/* <CommentList /> */}
+      {/* <CityList /> */}
+      {/* <Airbnb /> */}
+      <NotificationList />
 
     </React.StrictMode>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import Comment from './Comment';
 
-const CommentList = (props) => {
+const CommentList = () => {
   return (
     <div>
       <Comment name={"권미은"} comment={"댓글"} />
