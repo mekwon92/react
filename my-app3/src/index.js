@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 // import App from './App';
 import reportWebVitals from './reportWebVitals';
-import MyObject from './chapter_07/MyObject';
-
+import MyEffect from './chapter_07/MyEffect';
+import Toggle from './chapter_08/Toggle';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
@@ -28,8 +28,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
       {/* <NotificationList /> */}
       {/* <Counter/ > */}
       {/* <MyArray /> */}
-      <MyObject />
-
+      {/* <MyObject /> */}
+      {/* <MyEffect/> */}
+      <Toggle />
     </React.StrictMode>
   );
 // }, 1000);
