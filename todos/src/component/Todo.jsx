@@ -5,6 +5,7 @@ const Todo = ({id, content, writer, regDate}) => {
     <li>
       <p>{id}, {content}</p>
       <p>{writer}, {regDate}</p>
+      
     </li>
   );
 }

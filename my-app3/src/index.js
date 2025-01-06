@@ -1,17 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-// import App from './App';
 import reportWebVitals from './reportWebVitals';
-import MyEffect from './chapter_07/MyEffect';
-import Toggle from './chapter_08/Toggle';
+import AttendanceBook from './chapter_10/AttendanceBook';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
 // setInterval(() => {
   
   root.render(
-    <React.StrictMode>
+    <>
       {/* <App /> */}
       {/* <MyElement /> */}
       {/* <Library /> */}
@@ -30,8 +28,12 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
       {/* <MyArray /> */}
       {/* <MyObject /> */}
       {/* <MyEffect/> */}
-      <Toggle />
-    </React.StrictMode>
+      {/* <Toggle /> */}
+      {/* <MyEvent /> */}
+      {/* <LandingPage /> */}
+      {/* <NumberList numbers={[1,2,3,4,5]} /> */}
+      <AttendanceBook />
+    </>
   );
 // }, 1000);
 

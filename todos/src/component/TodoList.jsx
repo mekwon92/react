@@ -26,10 +26,12 @@ const  TodoList = () => {
       setTodos(data);
     })();
   }, []); //무한루프 방지를 위해 빈배열 사용
-  return todos.map(todo => <Todo key = {todo.id} {...todo} />);
+  return todos.length ? <ul>{todos.map(todo => <Todo key = {todo.id} {...todo} />)}</ul> :<ul><li>페이지 로딩중....</li></ul>;
    // 얘가 더 빠름. 위에것을 안기다려서 undefined 뜸.
    // 순차로 만들기 위해 async/await 사용함. await는 async함수 안에서만 사용가능함
    // await는 Promise가 해결될 때까지 기다림(데이터를 가져오고 파싱한 후에 setTodos(data)가 실행)
 }
+
+
 
 export default TodoList;
