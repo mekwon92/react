@@ -2,34 +2,36 @@ import React, { useState } from 'react';
 
 const MyObject = () => {
 
-  const fruits = [
-    { name : '사과' , cnt: 0},
-    { name : '귤' , cnt: 0},
-    { name : '복숭아' , cnt: 0},
-    { name : '딸기' , cnt: 0},
-    { name : '포도' , cnt: 0}
-  ]
+  // const fruits = [
+  //   { name : '사과' , cnt: 0},
+  //   { name : '귤' , cnt: 0},
+  //   { name : '복숭아' , cnt: 0},
+  //   { name : '딸기' , cnt: 0},
+  //   { name : '포도' , cnt: 0}
+  // ]
+  const fruits = ['사과', '귤','복숭아','딸기','포도'];
 
-  const [bucket, setBucket] = useState(fruits);
+  //초기값
+  const fruitsCount = fruits.map(f => ({name : f, count: 0}));
+  console.log(fruitsCount);
+
+  const [bucket, setBucket] = useState([...fruitsCount]); //fruitsCount 넣으면 안됨(복제본 사용)
+  console.log(fruitsCount);
   
   return (
     <div>
-      <h3>과일 바구니 - {bucket}</h3>
+      <h3>과일바구니</h3>
       <button onClick={() => {
-        // const rand = parseInt(Math.random() * fruits.length);
-        // console.log(rand);
+        const rand = parseInt(Math.random() * fruits.length);
+        bucket[rand].count++;
+        console.log(bucket);
+        setBucket([...bucket]);
         
       }}>과일 추가</button>
-      <button onClick={() => {
-      }}>과일 제거</button>
-      <button onClick={() => {
-      }}>바구니 비우기</button>
+      
+      <button onClick={() => setBucket([...fruitsCount])}>바구니 비우기</button>
       <ul>
-       <li>사과</li>
-       <li>귤</li>
-       <li>복숭아</li>
-       <li>딸기</li>
-       <li>포도</li>
+        {bucket.map((f,i) => <li key = {i}>{f.name} :: {f.count}개</li>)}
       </ul>
     </div>
   );

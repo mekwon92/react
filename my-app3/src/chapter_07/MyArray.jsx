@@ -13,14 +13,20 @@ const MyArray = () => {
         bucket.push(fruits[rand]);
         setBucket([...bucket]);
       }}>과일 추가</button>
+
+
       <button onClick={() => {
         const rand = parseInt(Math.random() * fruits.length);
         bucket.splice(rand, 1);
         setBucket([...bucket]);
       }}>과일 제거</button>
+
+
       <button onClick={() => {
         setBucket([]);
       }}>바구니 비우기</button>
+
+      
       <ul>
         {bucket.map((f,i) => <li key={i}>{f}</li>)}
       </ul>
