@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Multiple from './chapter_11/Multiple';
+import Calculator from './chapter_12/Calculator';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
@@ -34,7 +34,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
       {/* <NumberList numbers={[1,2,3,4,5]} /> */}
       {/* <AttendanceBook /> */}
       {/* <MyForm /> */}
-      <Multiple />
+      {/* <Multiple /> */}
+      <Calculator />
     </>
   );
 // }, 1000);
