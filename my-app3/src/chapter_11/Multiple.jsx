@@ -1,8 +1,10 @@
-import React, { use, useState } from 'react';
+import React, { useState } from 'react';
 
+
+//자식 컴포넌트
 const TopingList = (props) => {
-  const {topings} = props;
-  console.log(topings);
+
+  const {topings, onSetMyTopings} = props;
 
   // 최대 토핑개수가 3개
   // 1번째 방법(cnt이용)
@@ -46,8 +48,12 @@ const TopingList = (props) => {
       alert('최대 3개 체크');
       return;
     }
-    c ? setMySet(items => new Set(items.add(e.target.value))) : setMySet(items => {items.delete(e.garget.value); return new Set(items);});
-  }
+    const newSet = new Set(mySet);
+    c ? newSet.add(e.target.value) : newSet.delete(e.target.value);
+    setMySet(newSet);
+    // 부모 컴포넌트에 자식 state 전달(함수로 전달해야함...ㅠ_ㅠ어렵) =>redux(상태관리 라이브러리) 사용
+    onSetMyTopings(newSet);
+  };
 
   return topings.length === 0 ? <h1>토핑이 없습니다</h1> : (
     <>
@@ -61,16 +67,23 @@ const TopingList = (props) => {
 }
 
 
-
+//부모 컴포넌트
 const Multiple = () => {
+  const [myTopings, setMyTopings] = useState(new Set());
   const topings = ["베이컨","페퍼로니","파인애플","치즈","고구마","감자","새우","불고기"];
   return (
     <form onSubmit={e => {
-      console.log(e.target);
-    alert(`고객이 선택한 메뉴는  입니다`);
+      e.preventDefault();
+
+      if(myTopings.size === 0) {
+        alert('1개 이상의 토핑 선택');
+        return;
+      }
+      
+      alert(`선택한 토핑은 ${Array.from(myTopings).join(", ")}`);
 
     }}>
-      <TopingList topings={topings}/>
+      <TopingList topings={topings} myTopings={myTopings} onSetMyTopings={setMyTopings}/>
       <button>주문</button>
     </form>
   );
