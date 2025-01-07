@@ -1,8 +1,13 @@
 import React from 'react';
+import { useState } from 'react';
 import {Container, Nav, Navbar} from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Header = () => {
+  // const [activeKey, setActiveKey] = useState("link-0");
+  const location = useLocation();
+  console.log(location);
+  
   return (
     <>
       {/* Router의 link 컴포넌트는 직접적 페이지 이동을 담당 
@@ -16,12 +21,12 @@ const Header = () => {
         <hr />
         <Container>
           <Navbar.Brand as={Link} to="/">react sample post</Navbar.Brand> 
-          <Nav variant="pills" defaultActiveKey="link-0" className='me-auto'>
+          <Nav variant="pills" activeKey={location.pathname} className='me-auto' defaultActiveKey="/" >
             <Nav.Item>
-              <Nav.Link as={Link} to="/" eventKey="link-0">Home</Nav.Link>
+              <Nav.Link as={Link} to="/" eventKey="/">Home</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link as={Link} to="/posts" eventKey="link-1">Posts</Nav.Link>
+              <Nav.Link as={Link} to="/posts" eventKey="/posts">Posts</Nav.Link>
             </Nav.Item>
           </Nav>
         </Container>
