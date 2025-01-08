@@ -1,42 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useAxios from '../../hooks/useAxios';
 
 const List = () => {
-  //state
-  const [boards, setBoards] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const {data, loading, error, req} = useAxios();
 
   const navigate = useNavigate();
 
-  //effect >> api 호출
+  // effect >>> api 호출
   useEffect(() => {
-    (async () => {
-    setLoading(true);
-    try {
-    //  const resp = await axios.get('http://localhost:8080/api/v1/board/list');
-     const resp = await axios({
-      url : 'http://localhost:8080/api/v1/board/list',
-      method : 'get'
-      });
-     
-     setBoards(resp.data.dtoList);
-     setError(null);
-    } 
-    catch (error) {
-      setError(error);
-    } 
-    finally{
-      setLoading(false);
-    }
-  })();
-
-    //언마운트 시 할일
-    return () => {
-
-    };
-  },[])
+    req('get','board/list');
+  },[req]);
 
   if(error) {
     return <div><h1>에러발생</h1></div>;
@@ -51,7 +25,7 @@ const List = () => {
     <div>
       <button onClick={() => navigate('/write')}>글쓰기</button>
       <ul>
-        {boards.map(b => <li key={b.bno}>{b.title}</li>)}
+        {data.dtoList.map(b => <li key={b.bno}>{b.title}</li>)}
       </ul>
     </div>
   );
