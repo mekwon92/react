@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Calculator from './chapter_12/Calculator';
+import ProfileCard from './chapter_13/ProfileCard';
+import Accommodate from './chapter_07/Accommodate';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
@@ -35,7 +36,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
       {/* <AttendanceBook /> */}
       {/* <MyForm /> */}
       {/* <Multiple /> */}
-      <Calculator />
+      {/* <Calculator /> */}
+      {/* <ProfileCard /> */}
+      <Accommodate />
     </>
   );
 // }, 1000);
