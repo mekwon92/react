@@ -1,14 +1,15 @@
 import axios from 'axios';
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
+import { useAuth } from './AuthContext';
 
 
 const BASE_URL ='http://localhost:8080/api/v1/';
 const useAxios = (baseUrl = BASE_URL) => {
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  const tmpToken = 'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MzY3NTA5ODYsImV4cCI6MTczOTQyOTM4Niwic3ViIjoidXNlcjEwMEBtZTkyMTAwOTg0LmNvbSJ9.44o3iBsywCBzAOdTnE8iFBv1V0hDaUd_w4B-XGM8Ipo';
+  const {token} = useAuth();
+  // const tmpToken = 'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MzY3NTA5ODYsImV4cCI6MTczOTQyOTM4Niwic3ViIjoidXNlcjEwMEBtZTkyMTAwOTg0LmNvbSJ9.44o3iBsywCBzAOdTnE8iFBv1V0hDaUd_w4B-XGM8Ipo';
 
   const req = useCallback(
     async(method, endpoint, body = null, addHeaders = {}) => {
@@ -21,8 +22,8 @@ const useAxios = (baseUrl = BASE_URL) => {
           data: body,
           headers: {
             'Content-Type':'application/json',
-            'Authorization':`Bearer ${tmpToken}`,
-            ... addHeaders
+            'Authorization':`Bearer ${token}`,
+            ...addHeaders
           }
         });
         setData(resp.data);
@@ -32,7 +33,7 @@ const useAxios = (baseUrl = BASE_URL) => {
       } finally {
         setLoading(false);
       }
-    },[baseUrl]);
+    },[baseUrl, token]);
 
   return {data, loading, error, req};
 }

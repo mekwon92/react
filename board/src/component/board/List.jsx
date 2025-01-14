@@ -25,7 +25,7 @@ const List = () => {
     <div>
       <button onClick={() => navigate('/write')}>글쓰기</button>
       <ul>
-        {data.map(b => <li key={b.num}>{b.title}</li>)}
+        {data && data.map(b => <li key={b.num}>{b.title}</li>)}
       </ul>
     </div>
   );
