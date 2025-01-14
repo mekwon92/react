@@ -3,6 +3,15 @@ import useAxios from '../../hooks/useAxios';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/AuthContext';
 
+// 초기페이지 > 로그인페이지
+// 로그인성공시 스토리지에 토큰, 이메일 저장
+// 1) 페이지 이동 > dashboard
+// 2) dashboard내에서 스토리지 내의 값을 확인(state)
+// 3) 로그아웃 구현
+// 4) 비 로그인 상태에서도 dashboard사용가능
+//  - guest
+//  - 조건부 연산을 사용해 login으로 이동할 링크 생성
+//  - 로그인 시점엔 /list이동할 링크 생성
 
 const LoginForm = () => {
 // state
