@@ -9,23 +9,23 @@ const List = () => {
 
   // effect >>> api 호출
   useEffect(() => {
-    req('get','board/list');
+    req('get','notes/listall');
   },[req]);
 
   if(error) {
-    return <div><h1>에러발생</h1></div>;
+    return <div><h1>에러발생</h1></div>
   }
 
   
   if(loading) {
-    return <div><h1>로딩중</h1></div>;
+    return <div><h1>로딩중</h1></div>
   }
 
   return (
     <div>
       <button onClick={() => navigate('/write')}>글쓰기</button>
       <ul>
-        {data.dtoList.map(b => <li key={b.bno}>{b.title}</li>)}
+        {data.map(b => <li key={b.num}>{b.title}</li>)}
       </ul>
     </div>
   );

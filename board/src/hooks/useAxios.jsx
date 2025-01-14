@@ -8,6 +8,8 @@ const useAxios = (baseUrl = BASE_URL) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const tmpToken = 'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MzY3NTA5ODYsImV4cCI6MTczOTQyOTM4Niwic3ViIjoidXNlcjEwMEBtZTkyMTAwOTg0LmNvbSJ9.44o3iBsywCBzAOdTnE8iFBv1V0hDaUd_w4B-XGM8Ipo';
+
   const req = useCallback(
     async(method, endpoint, body = null, addHeaders = {}) => {
       setLoading(true);
@@ -19,10 +21,12 @@ const useAxios = (baseUrl = BASE_URL) => {
           data: body,
           headers: {
             'Content-Type':'application/json',
+            'Authorization':`Bearer ${tmpToken}`,
             ... addHeaders
           }
         });
         setData(resp.data);
+        return resp.data;
       } catch (error) {
         setError(error);        
       } finally {
