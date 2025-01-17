@@ -12,7 +12,6 @@ const View = () => {
   const [note, setNote] = useState({});
   const [myLike, setMyLike] = useState({});
 
-  // effect >> api호출
   useEffect(() => {
     
     (async () => {
@@ -21,12 +20,12 @@ const View = () => {
       const queryString = new URLSearchParams({email, num}).toString();
       const resp2 = await req('get',`likes?${queryString}`);
       setMyLike(resp2);
-      
+    
     })();
   }, [num,req]);
 
-  if(error) return <div><h1>에러 발생</h1></div>;
-  if(loading) return <div><h1>로딩중</h1></div>;
+  if(error) return <div><h1>에러 발생</h1></div>
+  if(loading) return <div><h1>로딩중</h1></div>
 
   const handleDelete = e => {
     e.preventDefault();
@@ -35,12 +34,21 @@ const View = () => {
     navigate("/notes");
   }
 
-  // 빈객체라 note && 사용?
+  //좋아요 토글
+  const handleLikesToggle = async e => {
+    e.preventDefault();
+    const ret = await req('post',`likes`,{email, num});
+    setMyLike(!myLike);
+    setNote({...note, likesCnt:note.likesCnt + (ret.result ? -1 : 1)})
+    console.log(note);
+    
+  }
+
   return note && (
     <div>
       <h1>View</h1>
       <p>{param.num}번</p>
-      <p>{num}번 글입니다요</p>
+      <p>{num}번</p>
       <h4>등록 {note.regDate} 수정 {note.modDate}</h4>
       <h3>제목</h3>
       <p>{note.title}</p>
@@ -48,8 +56,9 @@ const View = () => {
       <p>{note.content}</p>
       <h3>작성자</h3>
       <p>{note.writer}</p>
-      <p><button>좋아요 <span style={{color:'red'}}>{myLike ? '♥'  : '♡'} </span> {note.likesCnt}</button></p>
+      <p><button onClick={handleLikesToggle}>좋아요 <span style={{color:'red'}}>{myLike ? '♥'  : '♡'} </span> {note.likesCnt}</button></p>
       <div>
+        {/* note.attachDTOs && 제거시 undefined 오류 */}
         <p>{note.attachDTOs && note.attachDTOs.length}개의 첨부파일</p>
         <ul>
           {note.attachDTOs && note.attachDTOs.map(a=><li key={a.uuid}><Link to={a.url}>{a.origin}</Link></li>)}
