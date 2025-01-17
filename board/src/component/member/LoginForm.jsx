@@ -38,7 +38,7 @@ const LoginForm = () => {
       // localStorage.setItem('email', email); 이걸 context로 넘긴건가..?
       // localStorage.setItem('token', resp);
 
-      resp && navigate('/dashboard');
+      resp && navigate('/notes');
 
     } catch (error) {
       console.error("로그인 실패", error);
