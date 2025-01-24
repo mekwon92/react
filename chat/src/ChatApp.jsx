@@ -12,8 +12,8 @@ const ChatApp = () => {
       const message = JSON.parse(e.data);
       console.log(message);
       setMessages(prev => [...prev, message])
+      return () => ws.close()
     }
-    return () => ws.close()
   }, []);
 
   const sendMessage = () => {
