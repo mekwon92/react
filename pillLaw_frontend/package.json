@@ -1,5 +1,6 @@
 {
   "name": "pilllaw_front",
+  "homepage": "http://localhost:3000/pilllaw",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -12,7 +13,6 @@
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
     "@tinymce/tinymce-react": "^5.1.1",
-    "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "chart.js": "^4.4.7",
