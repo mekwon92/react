@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../../resources/css/style.css";
 import { useNavigate } from "react-router-dom";
 
+
 const MyOrder = () => {
   const [address, setAddress] = useState({
     postcode: "",
@@ -194,6 +195,60 @@ const MyOrder = () => {
   // 결제하기 버튼 활성화 조건
   const isOrderValid = totalPayment > 0 && isAddressValid && isTermsChecked;
 
+
+  // 결제 버튼을 클릭하면 호출되는 함수
+  const requestPayment = () => {
+    const { IMP } = window; // Iamport 네임스페이스 접근
+
+    IMP.init("imp00000000"); // 발급받은 가맹점 식별 번호로 초기화
+
+    const paymentData = {
+      pg: "html5_inicis", // 결제 PG사 (예시로 Inicis 사용)
+      pay_method: "card", // 결제 수단 (카드)
+      name: "상품명", // 상품명
+      amount: totalPayment, // 결제 금액
+      buyer_name: "구매자 이름", // 구매자 이름
+      buyer_tel: "01012345678", // 구매자 전화번호
+      buyer_email: "buyer@example.com", // 구매자 이메일
+      buyer_addr: "주소", // 구매자 주소
+      buyer_postcode: "12345", // 구매자 우편번호
+      m_redirect_url: "/order/fail", // 결제 실패 시 이동할 URL
+    };
+
+    // 결제 창 호출
+    IMP.request_pay(paymentData, (rsp) => {
+      if (rsp.success) {
+        // 결제 성공 시 백엔드로 결제 정보 전송
+        const paymentInfo = {
+          imp_uid: rsp.imp_uid,
+          merchant_uid: rsp.merchant_uid,
+          amount: rsp.paid_amount,
+          status: "success",
+        };
+
+        // 결제 완료 후 서버로 전달
+        fetch("/api/payment/complete", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(paymentInfo),
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log("결제 정보 저장 성공:", data);
+            window.location.href = "/order/success"; // 결제 성공 시 성공 페이지로 이동
+          })
+          .catch(error => {
+            console.error("결제 정보 저장 실패:", error);
+          });
+      } else {
+        // 결제 실패 시 실패 페이지로 이동
+        window.location.href = "/order/fail";
+      }
+    });
+  };
+
   return (
     <div className="wrap">
       <Container style={{ paddingTop: '115.19px' }}>
@@ -326,7 +381,7 @@ const MyOrder = () => {
         <div className="d-flex justify-content-center">
           <div className="d-flex align-items-center">
             <Button variant="secondary" onClick={goToCart} className="me-3">장바구니로 돌아가기</Button>
-            <Button className="btn-pilllaw" disabled={!isOrderValid}>결제하기</Button>
+            <Button className="btn-pilllaw" disabled={!isOrderValid} onClick={requestPayment}>결제하기</Button>
           </div>
         </div>
 
